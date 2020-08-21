@@ -13,4 +13,6 @@ This bot is a bot that interacts with the GitHub API to tell information about u
     
 ## Invite
 
-Invite this bot to your server with [this Link](https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=3072)
+This bot is on our [Discord Server](https://discord.gg/SucMbpg)
+
+Invite this bot to your server with [this Link](https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=8)
