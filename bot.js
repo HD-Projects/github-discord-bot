@@ -13,13 +13,13 @@ const websiteLink = "https://hdprojects.dev/";
 
 // Invite Link 
 
-// https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=8
+// https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=3072
 
 bot.login(auth.token);
 
 function checkValue(value){
-  if(value<1){
-    return toString(value);
+  if(value){
+    return value;
   } else{
     return "Not Set";
   }
