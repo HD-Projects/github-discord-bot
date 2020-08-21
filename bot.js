@@ -18,11 +18,9 @@ const websiteLink = "https://hdprojects.dev/";
 bot.login(auth.token);
 
 function checkValue(value){
-  if(value == 1){
-    return "True";
-  }else if(value == 0){
-    return "False";
-  }else{
+  if(value<1){
+    return toString(value);
+  } else{
     return "Not Set";
   }
 }
