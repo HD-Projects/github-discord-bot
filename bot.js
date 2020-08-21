@@ -92,7 +92,7 @@ bot.on('message', function(message) {
             .setDescription("GitHub Account Bot")
             .setAuthor(botName, logo,websiteLink )
             .addFields(
-              { name: "Username: ", value: orgtodo.login, inline: true},
+              { name: "Username: ", value: todo.login, inline: true},
               { name: 'Website: ', value: checkValue(todo.blog), inline: true },)
               .addField('\u200b', '\u200b', true)
               .addFields(
