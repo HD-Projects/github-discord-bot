@@ -13,7 +13,7 @@ const websiteLink = "https://hdprojects.dev/";
 
 // Invite Link 
 
-// https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=3072
+const inviteLink = "https://discord.com/oauth2/authorize?client_id=746374338575335454&scope=bot&permissions=3072";
 
 bot.login(auth.token);
 
@@ -62,11 +62,25 @@ bot.on('message', function(message) {
         { name: listener+"user", value: "Use the user command to check information about a user !user ad101-lab to learn about the argument user"},
         { name: listener+"org", value: "Use org just like user to learn more information about a user"},
         { name: listener+"repo", value: "Use the repo command like !repo hd-projects/hd-projects.github.io to check on a that github repository."},
+        { name: listener+"invite", value: "Use this command to invite the bot to your server."},
       )
       .setTimestamp()
       .setFooter('Made By HD Projects', 'https://hdprojects.dev/favicon.png');
       message.channel.send(helpEmbed);
       break;
+      case 'invite':
+        let inviteEmbed = new Discord.MessageEmbed()
+        .setColor('#0099ff')
+        .setTitle("Invite Link")
+        .setURL(inviteLink)
+        .setAuthor(botName, logo,websiteLink )
+        .addFields(
+          { name: "Invite the bot to your server", value: "Click on the link above to add the bot to your server."},
+        )
+        .setTimestamp()
+        .setFooter('Made By HD Projects', 'https://hdprojects.dev/favicon.png');
+        message.channel.send(inviteEmbed);
+        break;
     case 'user':
       let url = 'https://api.github.com/users/'+args[0];
       console.log(url);
@@ -240,6 +254,55 @@ bot.on('message', function(message) {
         console.log(content);
       });
       break;
+      case 'following':
+        console.log(following.users);
+
+        break;
+      case 'remfollow':
+
+        // User to remove
+        let remUser = args[0];
+
+        // Create Varable For the List of followed Users
+        let followingList = following.users;
+
+        // A varable to log if user is found
+        let found = false;
+
+        console.log(followingList.length);
+
+        for(i = 0; i < followingList.length; i++){
+          console.log(`${followingList[i]} vs. ${remUser}`)
+          let User = followingList[i];
+          if(User.toLowerCase == remUser.toLowerCase){
+            followingList.pop(i);
+            found = true;
+            let removeNotice = new Discord.MessageEmbed()
+              .setColor('#0099ff')
+              .setTitle(`${User} Was Removed`)
+              .setAuthor(botName, logo, websiteLink)
+              .addFields(
+                { name: `To Add ${User} Back`, value: `${listener}follow ${User}`, inline: true},
+              )
+              .setTimestamp()
+              .setFooter('Made By HD Projects', 'https://hdprojects.dev/favicon.png');
+            message.channel.send(removeNotice);
+            continue;
+          }
+        }
+        if(!found){
+          let notFoundNotice = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(`User ${remUser} was not on your following list`)
+            .setAuthor(botName, logo,websiteLink )
+            .addFields(
+              { name: `To Add ${remUser}`, value: `${listener}follow ${followingList[i]}`, inline: true},
+            )
+            .setTimestamp()
+            .setFooter('Made By HD Projects', 'https://hdprojects.dev/favicon.png');
+          message.channel.send(notFoundNotice);
+        }
+        break;
       case 'repo':
         let path = args[0];
         let reposUrl = "https://api.github.com/repos/"+args[0];
